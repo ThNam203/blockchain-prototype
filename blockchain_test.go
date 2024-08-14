@@ -13,6 +13,9 @@ func TestBlockchain(t *testing.T) {
 	blockchain.AddBlock([]byte("Block 2 - 1 Bitcoin"))
 
 	for i, block := range blockchain.blocks {
+		pow := NewProofOfWork(block)
+		assert.True(t, pow.Validate())
+
 		if i == 0 {
 			assert.Equal(t, block.Data, []byte("Genesis block"))
 			continue
